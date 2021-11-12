@@ -8,12 +8,10 @@ for side in range(bottom,top,step=1)
         for j in range(i+1,floor((side-i)/2),step=1)
             for k in range(j+1,side-i-j-1,step=1)
                 list=[i,side-i-j,j,side-j-k,k,side-k-i]
-                if count(q->(i-1<q<i+1),list)*count(r->(j-1<r<j+1),list)*count(s
-                        ->(k-1<s<k+1),list)<2
+                if count(q->(q==i),list)*count(q->(q==j),list)*count(q->(q==k),list)<2
                     figures[side-bottom+1]+=1
                 end
-            end
-            
+            end  
         end
     end
     println(side," -> ",figures[side-bottom+1])
