@@ -1,5 +1,6 @@
 top=56;
 bottom=6; scope=top-bottom+1;
+timestart=time();
 figures=Array{Int32}(undef,scope)
 
 for side in range(bottom,top,step=1)
@@ -17,5 +18,8 @@ for side in range(bottom,top,step=1)
     println(side," -> ",figures[side-bottom+1])
 end
 
+timeend=time();
+deltatime=timeend-timestart;
+println("Calculation took ",deltatime," seconds");
                 
                           
