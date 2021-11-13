@@ -23,7 +23,10 @@ for side in range(bottom,top+1, 1):
                 a=side-i-j
                 b=side-j-k
                 c=side-j-i
+                corner=i+j+k
                 if a!=i and a!=j and a!=k and b!=i and b!=j and b!=k and c!=i and c!=j and c!=k:
+                #if k-i!=side-corner and k-j!=side-corner and j-i!=side-corner:
+
                     figures[side-bottom] += 1
     #print(side,"->",figures[side-bottom])
     

@@ -10,11 +10,12 @@ for side=bottom:top
     for i=0:floor(side/3)
         for j=i+1:floor((side-i)/2)
             for k=j+1:side-i-j-1
-                #list=[i,j,k,side-i-j,side-j-k,side-k-i]
+                corner=i+j+k
                 a=side-i-j
                 b=side-j-k
                 c=side-j-i
                 if a!=i&&a!=j&&a!=k&&b!=i&&b!=j&&b!=k&&c!=i&&c!=j&&c!=k
+                #if k-i!=side-corner&&k-j!=side-corner&&j-i!=side-corner
                     figures[side-bottom+1]+=1
                 end
             end  
