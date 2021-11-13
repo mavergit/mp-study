@@ -9,16 +9,17 @@ for side in range(bottom,top,step=1)
     for i in range(0,floor(side/3),step=1)
         for j in range(i+1,floor((side-i)/2),step=1)
             for k in range(j+1,side-i-j-1,step=1)
-                list=[i,side-i-j,j,side-j-k,k,side-k-i]
+                list=[i,j,k,side-i-j,side-j-k,side-k-i]
+                #println(list)
                 if count(q->(q==i),list)*count(q->(q==j),list)*count(q->(q==k),list)<2
                     figures[side-bottom+1]+=1
                 end
             end  
         end
     end
-    println(side," -> ",figures[side-bottom+1])
+    #println(side," -> ",figures[side-bottom+1])
 end
-
+println(top," -> ",figures[top-bottom+1])
 timeend=time();
 deltatime=timeend-timestart;
 println("Calculation took ",deltatime," seconds");
