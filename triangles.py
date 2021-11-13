@@ -2,7 +2,7 @@
 import math
 import time
 timestart=time.time()
-top=66
+top=196
 bottom=6
 scope=top-bottom+1
 #julia figures=Array{Int32}(undef,scope)
@@ -17,9 +17,13 @@ for side in range(bottom,top+1, 1):
             
             for k in range(j+1,side-i-j,1):
                
-                triangle=[i,j,k,side-i-j,side-j-k,side-k-i]
+                #triangle=[i,j,k,side-i-j,side-j-k,side-k-i]
                 #print(triangle)
-                if triangle.count(i)*triangle.count(j)*triangle.count(k)<2:
+                #if triangle.count(i)*triangle.count(j)*triangle.count(k)<2:
+                a=side-i-j
+                b=side-j-k
+                c=side-j-i
+                if a!=i and a!=j and a!=k and b!=i and b!=j and b!=k and c!=i and c!=j and c!=k:
                     figures[side-bottom] += 1
     #print(side,"->",figures[side-bottom])
     
