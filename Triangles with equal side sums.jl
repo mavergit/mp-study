@@ -1,4 +1,5 @@
-top=66;
+#default top=46 for less than a second computation
+top=46;
 bottom=6; scope=top-bottom+1;
 timestart=time();
 figures=Array{Int32}(undef,scope)
