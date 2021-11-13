@@ -1,5 +1,5 @@
-#default top=46 for less than a second vanilla julia computation
-top=196
+#default top<=100 for less than a second vanilla julia computation
+top=96
 bottom=6
 scope=top-bottom+1
 timestart=time();
@@ -11,7 +11,6 @@ for side=bottom:top
         for j=i+1:floor((side-i)/2)
             for k=j+1:side-i-j-1
                 #list=[i,j,k,side-i-j,side-j-k,side-k-i]
-                #if count(q->(q==i),list)*count(q->(q==j),list)*count(q->(q==k),list)<2
                 a=side-i-j
                 b=side-j-k
                 c=side-j-i

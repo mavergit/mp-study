@@ -1,8 +1,8 @@
-# default top=46 for less than a second vanilla julia computation
+# default top<=100 for less than a second vanilla julia computation
 import math
 import time
 timestart=time.time()
-top=196
+top=96
 bottom=6
 scope=top-bottom+1
 #julia figures=Array{Int32}(undef,scope)
