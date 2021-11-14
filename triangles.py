@@ -17,15 +17,16 @@ for side in range(bottom,top+1, 1):
             
             for k in range(j+1,side-i-j,1):
                
-                #triangle=[i,j,k,side-i-j,side-j-k,side-k-i]
-                #print(triangle)
-                #if triangle.count(i)*triangle.count(j)*triangle.count(k)<2:
+                #corner=i+j+k
                 a=side-i-j
                 b=side-j-k
-                c=side-j-i
-                corner=i+j+k
+                c=side-k-i
+
+                #triangle=[corner,i,j,k,a,b,c]
+                
                 if a!=i and a!=j and a!=k and b!=i and b!=j and b!=k and c!=i and c!=j and c!=k:
                 #if k-i!=side-corner and k-j!=side-corner and j-i!=side-corner:
+                    #print(triangle)
 
                     figures[side-bottom] += 1
     #print(side,"->",figures[side-bottom])

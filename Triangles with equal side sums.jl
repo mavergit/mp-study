@@ -3,17 +3,16 @@ top=96
 bottom=6
 scope=top-bottom+1
 timestart=time();
-figures=Array{Int32}(undef,scope)
-
+figures=Array{Int}(undef,scope)
 for side=bottom:top
     figures[side-bottom+1]=0
     for i=0:floor(side/3)
         for j=i+1:floor((side-i)/2)
             for k=j+1:side-i-j-1
-                corner=i+j+k
-                a=side-i-j
-                b=side-j-k
-                c=side-j-i
+                #local corner=i+j+k
+                local a=side-i-j
+                local b=side-j-k
+                local c=side-k-i
                 if a!=i&&a!=j&&a!=k&&b!=i&&b!=j&&b!=k&&c!=i&&c!=j&&c!=k
                 #if k-i!=side-corner&&k-j!=side-corner&&j-i!=side-corner
                     figures[side-bottom+1]+=1
