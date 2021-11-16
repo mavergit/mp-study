@@ -1,29 +1,29 @@
 #default top<=100 for less than a second vanilla julia computation
-top=96
-bottom=6
+top=9
+bottom=9
 scope=top-bottom+1
 timestart=time();
 figures=Array{Int}(undef,scope)
-for side::Int8=bottom:top
+for side::Int=bottom:top
     figures[side-bottom+1]=0
-    for i::Int8=0:floor(side/3)
-        for j::Int8=i+1:floor((side-i)/2)
-            for k::Int8=j+1:side-i-j-1
-                #local corner=i+j+k
+    for i::Int=0:floor(side/3)+1
+        for j::Int=i+1:floor((side-i)/2)+1
+            for k::Int=j+1:side-j
+                local corner=i+j+k
                 local a=side-i-j
                 local b=side-j-k
                 local c=side-k-i
                 if a!=i&&a!=j&&a!=k&&b!=i&&b!=j&&b!=k&&c!=i&&c!=j&&c!=k
                 #if k-i!=side-corner&&k-j!=side-corner&&j-i!=side-corner
                     figures[side-bottom+1]+=1
-                    #println(i,j,k,a,b,c)
+                    println(i,j,k,a,b,c)
                 end
             end  
         end
     end
-    #println(side," -> ",figures[side-bottom+1])
+    println(side," -> ",figures[side-bottom+1])
 end
-println(top," -> ",figures[top-bottom+1])
+#println(top," -> ",figures[top-bottom+1])
 timeend=time()
 deltatime=timeend-timestart
 println("Calculation took ",deltatime," seconds")
