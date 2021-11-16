@@ -1,5 +1,6 @@
 #default top<=100 for less than a second vanilla julia computation
-    top=15
+using Plots; gr()
+    top=53
     bottom=13
     scope=top-bottom+1
     timestart=time();
@@ -37,7 +38,7 @@
                                 end
                                 if diff==1
                                     figures[side-bottom+1]+=1
-                                    println(triangle)
+                                    #println(triangle)
                                 end
                             end
                         end
@@ -53,6 +54,17 @@
         println(side," -> ",figures[side-bottom+1])
     end
     #println(top," -> ",figures[top-bottom+1])
+    x=bottom:top
+   
+    lnfigures=Array{Float16}(undef,scope)
+    for i=1:scope
+        lnfigures[i]=log(figures[i])
+    end
+    plot1=plot(x,[lnfigures,x])
+    #display(plot1)
+    #savefig(plot1)
+    #display(plot(x,[figures))
+
     timeend=time()
     deltatime=timeend-timestart
     println("Calculation took ",deltatime," seconds")
