@@ -1,5 +1,5 @@
 #default top<=100 for less than a second vanilla julia computation
-top=96
+top=196
 using Plots; gr()
 bottom=6
 scope=top-bottom+1
