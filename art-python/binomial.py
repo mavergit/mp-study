@@ -1,14 +1,17 @@
+#%%time
 import math
+#from rich import print
+
 import time
 import timeit
 import scipy.special
 
-
 #print("Select power to sum")
 #power=int(input())
+start_time = timeit.default_timer()
 time1=time.time()
-power=2
-top=10**1
+
+top=10**3
 bottom=1
 row = [1]
 temp=[0]
@@ -24,9 +27,28 @@ for k in range(2,top+2):
         row[i]=temp[i]+temp[i-1]
     for i in range(0,k ):
         temp[i]=row[i]
-    #print(row)
+#print(row)
+elapsed = timeit.default_timer() - start_time
 time2=time.time()
-print(top,row)
-print("Time spent is ",time2-time1)
+print("naive time spent is ",time2-time1)
+print("timeit gives time", elapsed)
+#%%
+#%%time
+time3=time.time()
+sum=0
+temp=[1]
+for i in range(1,top+1):
+    temp.append(0)
+    for k in range(0,i+1):
+        temp[k]=scipy.special.binom(i,k)
+    #print(temp)
+time4=time.time()
+#print(top,row)
+#print(top,temp)
+
+print("scipy.special.binom time spent is ",time4-time3)
+print("speedup is ",(time4-time3)/(time2-time1))
 
 
+
+# %%
