@@ -20,10 +20,5 @@ while n>0:
     t.circle(100+step*(n-1))
     t.end_fill()
     
-   
-    
-
-
-
 turtle.update()
 turtle.exitonclick()
