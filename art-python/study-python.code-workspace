@@ -1,8 +1,12 @@
 {
 	"folders": [
-		{
-			"path": "./.."
-		}
-	],
+        
+        {
+            "path": "../"
+        }
+        {
+            "path": "../../python-course-site"
+        }
+    ],
 	"settings": {}
 }

@@ -4,9 +4,6 @@ import matplotlib
 from matplotlib import pyplot as plt
 from functools import cache, lru_cache
 import time
-
-
-
 #from rich import print
 base = 10**1
 bottom=9*base
