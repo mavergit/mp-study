@@ -43,16 +43,19 @@ remainder=t%fouryearsec
 print("Целое число 4летних циклов с нулевого момента функции time() -- ", leapcycles)
 print("Остаток в секундах",remainder,", это ", int(remainder//yearsec), "полных лет")
 
-# Сегодняшняя дата
+# Сегодняшняя дата. Тип - текстовая строка.
 today=datetime.datetime.now()
 print("Сегодня ", today)
 
 # считаем месяцы, дни, часы, минуты, секунды с начала года
+# strftime() вытаскивает из даты соотвествующие компоненты - месяцы, дни, часы, минуты, секунды
+# для вычислений их надо конвертировать в числа
 months=int(today.strftime("%m"))-1
 days=int(today.strftime("%d"))-1
 hours=int(today.strftime("%H"))
 mins=int(today.strftime("%M"))
 secs=int(today.strftime("%S"))
+print(type(secs))
 secsthisyear=secs+60*(mins+60*(hours+24*(days+30*months)))
 print("Прошло секунд с начала года --", secsthisyear)
 
