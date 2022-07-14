@@ -16,9 +16,17 @@
 			"editor.wordWrap": "wordWrapColumn",
 			"editor.wordWrapColumn": 64,
 			"editor.lineNumbers": "off",
-			"editor.quickSuggestions": false,
+			"editor.quickSuggestions": {
+				"comments": "off",
+				"strings": "off",
+				"other": "off"
+			},
 			"editor.minimap.enabled": false
 		},
-		"liveServer.settings.multiRootWorkspaceName": "python-course-site"
+		"liveServer.settings.multiRootWorkspaceName": "python-course-site",
+		"projectManager.any.maxDepthRecursion": 1,
+		"projectManager.any.baseFolders": [
+			"~/code"
+		]
 	}
 }
