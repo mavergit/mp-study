@@ -2,16 +2,14 @@ import random
 import time
 #choose 9 times out of (0,1,2) so that none of some triples are made of one choice
 
-#brute looping
-global triples
-triples=0
 global rows
 rows=[]
 global totalbads,scope
 totalbads=0
-scope=3**4
+scope=3*10**2
 def brute_loop():
-    global rows,scope
+    base9=0;good9=0
+    collection=[[]]
     for a1 in range(3):
         for a2 in range(3):
             for a3 in range(3):
@@ -21,36 +19,48 @@ def brute_loop():
                             for a7 in range(3):
                                 for a8 in range(3):
                                     for a9 in range(3):
-                                        global triples
                                         list=[a1,a2,a3,a4,a5,a6,a7,a8,a9]
-                                        #if check_triples(list)==1:
-                                        #triples+=1
                                         if check_triples(list)==0:
+                                            base9+=1
+                                            delta=0
                                             for a in range(scope):
-                                                rows=[]
-                                                ban=[]
-                                                for i in range(18):
+                                                ban=[[0]]
+                                                rows=[0]
+                                                for i in range(1,18):
+                                                    ban.append([i])
                                                     rows.append(0)
-                                                    ban.append(i)
                                                 rows.extend(list)
                                                 for l in range(3):
-                                                        for k in range(3):
-                                                                for i in range(3):
-                                                                    b3=rows[18+k+l*3]-i
-                                                                    if b3==0:
-                                                                        ban[i+k*3].append(b3+l)
-                                                                        ban[9+i+l*3].append(b3+k)
+                                                    for k in range(3):
+                                                        for i in range(3):
+                                                            b3=rows[18+k+l*3]-i
+                                                            if b3==0:
+                                                                ban[i+k*3].append(b3+l)
+                                                                ban[9+i+l*3].append(b3+k)                                                
                                                 for i in range(18):
                                                     select=[0,1,2]
-
-                                                    rows[i]=ban[i]
+                                                    for k in ban[i][1:]:
+                                                        select.remove(k)
+                                                    if select==[]:
+                                                        break
+                                                    rows[i]=random.sample(select,1)[0]
+                                                    if i<9:
+                                                        ban[9+i%3+3*rows[i]].append(i//3)
+                                                if check_cols(rows)==1:
+                                                    t=0
+                                                    for i in range(1,len(collection)):
+                                                        if rows==collection[i]:
+                                                            break
+                                                        t+=1
+                                                    if t==len(collection)-1:
+                                                        new=rows[:]
+                                                        collection.append(new)
+                                                        delta+=1
+                                            num=len(collection)-1
+                                            if delta!=0:
+                                                good9+=1
+    print(len(collection)-1,"good matrices","from",scope,"educated random variations for",good9,"good last 9 rows" )
                                                 
-                                                                        
-
-    print("good lines 18-26, good matrices total", scope*9750-totalbads)
-    print("good lines 18-26, bad matrices",totalbads/(scope*9750))
-    print("good lines 18-26, good matrices",1-totalbads/(scope*9750))
-
 def check_triples(list):
     result=0
     if (list[0]==list[1]==list[2]):
@@ -67,18 +77,8 @@ def check_triples(list):
         result=1
     return result
     
-        
-
-#print(triples)
-#print(3**8+3**7+3**6+3**5+3**3+3)
-#print(3**8+3**7+3**6+3**5+2*3**4+3**3+2*3**2+2*3)
-#print(triples/(3**9))
-#print(3**9-triples)
-
-
 def check_cols(rows):
     result=1
-    global badcols,totalbads
     badcols=0
     for l in range(3):
         if badcols==0:
@@ -89,45 +89,20 @@ def check_cols(rows):
                             b1=rows[i+k*3]-l
                             b2=rows[9+i+l*3]-k
                             b3=rows[18+k+l*3]-i
-
                             if (b1==b2==0 or b2==b3==0 or b3==b1==0):
                                 badcols+=1
                                 result=0
-                                #print(i+k*3,i+9+l*3,18+k+l*3,rows[i+k*3],rows[i+9+l*3],rows[18+k+l*3])
-                                #break
     totalbads+=badcols
     return result
 
-
-def run_random():
-    for a in range(scope):
-        global rows
-        #random.seed(time.time_ns())
-        rows=[]
-        for i in range(27):
-            
-            rows.append(0)
-            rows[-1]=random.randint(0,2)
-        #print(rows)
-        check_cols(rows)
-    print("bad matrices",totalbads/(scope))
-    print("good matrices",1-totalbads/(scope))
-
 def special_matrix():
-    global rows
+#    global rows
     rows=[0,2,1,2,1,0,1,0,2,1,0,2,0,2,1,2,1,0,2,1,0,1,0,2,0,2,1]
-    print("number of rows is",len(rows))
-    print("number of bad triples in the last 9 rows is", check_triples(rows[18:27]))
+    print(rows,'\n')
     check_cols(rows)
-    #print(badcols)
-    #print(totalbads)
-    
-    collection=[[]]
-    print(len(collection))
-    scope=10**6
+    collect_rows=[[]]
     for a in range(scope):
         ban=[[0]]
-    
         for i in range(1,18):
             ban.append([i])
         for l in range(3):
@@ -137,41 +112,29 @@ def special_matrix():
                             if b3==0:
                                 ban[i+k*3].append(b3+l)
                                 ban[9+i+l*3].append(b3+k)
-        #print(ban)
         for i in range(18):
             select=[0,1,2]
-            #print(ban[i][1:])
             for k in ban[i][1:]:
                 select.remove(k)
             if select==[]:
                 break
-            #print(select)
             rows[i]=random.sample(select,1)[0]
-            #print(rows[i])
             if i<9:
                 ban[9+i%3+3*rows[i]].append(i//3)
-                #print(ban[9+i%3+3*rows[i]])
-        #print(rows)
-        #check_cols(rows)
         if check_cols(rows)==1:
-            t=0
-            for i in range(len(collection)-1):
-                if rows==collection[i]:
+            for i in range(1,len(collect_rows)):
+                if rows==collect_rows[i]:
                     break
-                t+=1
-                
-            if t==len(collection)-1:
-                collection.append(rows)
-            #print(collection)
-    #print(len(collection))
-    print(collection)
-    print(len(collection)-1,"good matrices","from",scope,"random variations")
+                t+=1    
+            if t==len(collect_rows)-1:
+                new=rows[:]
+                collect_rows.append(new)
+    print(collect_rows)
+    print(len(collect_rows)-1,"good matrices","from",scope,"educated random variations")
     
-
-start=time.time()
-#brute_loop()
-#run_random()
-special_matrix()
-
-print(round(time.time()-start,2),"sec")
+for i in range(1,2):
+    start=time.time()
+    brute_loop()
+    #special_matrix()
+    print(round(time.time()-start,2),"sec")
 

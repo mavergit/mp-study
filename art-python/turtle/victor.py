@@ -1,4 +1,4 @@
-from itertools import count
+from itertools import count 
 from lib2to3.pygram import Symbols
 import turtle
 from turtle import *
@@ -14,7 +14,7 @@ def draw_board():
     #t.fd(400);t.bk(400);t.lt(90);t.fd(400);t.bk(400);t.rt(90)
     t.color("black")
     step=50
-    rows=10;columns=10
+    rows=4;columns=4 
     cells = [[2]]
     for j in range(rows): 
         for i in range(columns-1):
@@ -99,8 +99,8 @@ def set_symbol():
             t.lt(135)
             t.up()
             turtle.update()
-            check_victory()
             countr=0
+            check_victory()
 
         elif countr==0:
             cells[trow][tcolumn]=0
@@ -114,51 +114,60 @@ def set_symbol():
             t.lt(90)
             t.fd(step/3+5)
             turtle.update()
-            check_victory()
             countr=1
+            check_victory()
         
 #проверяем 3 значка в ряд
 def check_victory():
     global tcolumn,trow,cells,countr,pobeda,vryad,b
-    def vertical():
-        global tcolumn,trow,cells,countr,pobeda,vryad1,b
-        b=0
-        print(b)
+    print(cells[trow][tcolumn])
+    def gorizantal():
+        global tcolumn,trow,cells,countr,pobeda,vryad1
         vryad1=0
         vryad2=0
-        while not (cells[trow-b][tcolumn]==(2 or countr)):
+        while cells[trow][tcolumn+vryad1+1]==1-countr:
             vryad1+=1
-            print(vryad1)
-            b+=1
-            
-        while not (cells[trow+b][tcolumn]==(2 or countr)):
+            print(cells[trow][tcolumn+vryad1+1])
+
+        while cells[trow][tcolumn-vryad2-1]==1-countr:
             vryad2+=1
-            print(vryad2)
-            b+=1
-            #print(b)
-        
-        if vryad1+vryad2==pobeda:
+            print(cells[trow][tcolumn-vryad1-1])
+
+        if vryad1+vryad2==pobeda-1:
             t.down()
-            t.color("red")
-            #t.write("hi")
-            t.write("ура",font=('Arial',18,'normal'))
-            
+            t.color("green")
+            t.write("Победа",font=("Arial",24,"bold"))
             t.up()
-        elif vryad1+vryad2<pobeda:    
+        elif vryad1+vryad2<pobeda-1: 
+            vertical()
+
+    def vertical():
+        global tcolumn,trow,cells,countr,pobeda,vryad1
+        vryad1=0
+        vryad2=0
+        while cells[trow+vryad1+1][tcolumn]==1-countr:
+            vryad1+=1
+        while cells[trow-vryad2-1][tcolumn]==1-countr:
+           vryad2+=1
+        
+        if vryad1+vryad2==pobeda-1:
+            t.down()
+            t.color("green")
+            t.write("Победа",font=("Arial",24,"bold"))
+            t.up()
+        elif vryad1+vryad2<pobeda-1:    
             diogonal1()
         
-
-    def gorizantal():
-        global tcolumn,trow,cells,countr
-        vertical()
-
     def diogonal1():
-        global tcolumn,trow,cells,countr
-        diogonal2() 
+        global tcolumn,trow,cells,countr,pobeda,vryad1
+
 
     def diogonal2():
-        pass
-    vertical()
+        global tcolumn,trow,cells,countr,pobeda,vryad1
+
+
+    
+    gorizantal()
 
 #основной цикл
 def main():

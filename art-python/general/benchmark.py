@@ -9,15 +9,13 @@ def bench():
 ban=[[]]
 print(len(ban))    
 for i in range(1,3):
-    ban.append([i])
+    ban.append([i,i+1])
     ban[i].append(2*i)
-    #ban[i][0]=i
-
 print(ban)
 print(len(ban))
-if ban[1]==[1,2]:
-    ban.append([3,4])
-    print(ban)
+for a in ban:
+    print(a)
+print([1,2]==[2,3])
 end=time.time()
 time=round(end-start,2)
 print(time)

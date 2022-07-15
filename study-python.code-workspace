@@ -27,6 +27,8 @@
 		"projectManager.any.maxDepthRecursion": 1,
 		"projectManager.any.baseFolders": [
 			"~/code"
-		]
+		],
+		"codetogether.virtualCursorJoin": "ownVirtualCursor",
+		"codetogether.virtualCursorRemember": true
 	}
 }
